@@ -4,40 +4,37 @@ import time
 import random 
 
 obj = game() 
+state = obj.get_initial_state()
+score = 0
 
 moves = ["w", "a", "s", "d"] 
-d = {}
 temp_score = 0
 random_move = None
+d = {"w": 0.2, "a": 0.35, "s": 0.1, "d": 0.35}
+
 while True:
-    print("CURRENT SCORE:", obj.score, "\n")
+    print("CURRENT SCORE:", score, "\n")
     print(random_move)
-    for i in obj.mat:
+    for i in state:
         for j in i:
             temp = str(j)
             for l in range(5 - len(temp)):
-                temp = " " + temp 
-            
+                temp = " " + temp             
             print(temp, end=" ")
         print() 
 
-    random_move = random.choice(moves)[0]
-    # print(random_move)
-    ret = obj.move(random_move)
-    # time.sleep(1)
     
-    if ret == -1:  
-        if obj.score != temp_score:
-            d = {}
+    possible_moves = obj.get_possible_moves(state)
+    if possible_moves == []:
+        break
 
-        temp_score = obj.score
-        d[random_move] = 1 
-        print(d)
-        time.sleep(5)        
-    
-    if len(d) == 4:
-        break 
+    weights = [d[i] for i in possible_moves]
+    random_move = random.choices(possible_moves, weights=weights)[0]    
 
+    _, state, temp_score = obj.move(state, random_move)
+    score += temp_score 
+
+    # time.sleep(5)   
     _ = os.system('cls')
 
 print("GAME OVER!!!")
