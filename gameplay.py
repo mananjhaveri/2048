@@ -1,6 +1,7 @@
 import random 
 import os
 import copy 
+import test_pygame
 
 class game():
 
@@ -116,7 +117,8 @@ class game():
         
         return possible_moves
 
-
+    def display(self, state, score):
+        test_pygame.display(state, score)
 
 
 

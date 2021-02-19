@@ -45,14 +45,8 @@ state = obj.get_initial_state()
 score = 0
 
 while True:
-    print("CURRENT SCORE:", score, "\n")
-    for i in state:
-        for j in i:
-            temp = str(j)
-            for l in range(5 - len(temp)):
-                temp = " " + temp             
-            print(temp, end=" ")
-        print() 
+    obj.display(state, score)
+    # time.sleep(5)
 
     possible_moves = obj.get_possible_moves(state)
     if possible_moves == []:
@@ -73,11 +67,13 @@ while True:
     _, state, temp_score = obj.move(state, best_move) 
     score += temp_score 
 
-    if score > 5000:
+    if score > 2000:
         N = 3
-    elif score > 15000:
+    elif score > 7000:
         N = 4
 
     _ = os.system('cls')
 
-print("GAME OVER!!!")
+obj.display(state, str(score) + " || GAME OVER!!!")
+time.sleep(10)
+# print("GAME OVER!!!")
