@@ -38,13 +38,15 @@ class game():
             for i in range(3):
                 for j in range(4):
                     if state[i][j] == 0:
+                        if state[i+1][j] != 0:
+                            flag = True
                         state[i][j], state[i+1][j] = state[i+1][j], 0
-                        flag = True 
+                        
 
         
         for i in range(3):
             for j in range(4):  
-                if state[i][j] == state[i+1][j]:
+                if state[i][j] == state[i+1][j] and state[i+1][j] != 0:
                     state[i][j] += state[i+1][j]
                     state[i+1][j] = 0
                     score += state[i][j]
@@ -59,7 +61,7 @@ class game():
         return flag, state, score 
         
     
-    def move(self, state, direction):
+    def move(self, state, direction, place_element=True):
         if direction == "w":
             flag, state, score = self.swipe(state)
         elif direction == "s":
@@ -71,7 +73,7 @@ class game():
             flag, state, score = self.swipe(state)
             for i in range(3):
                 state = self.rotate(state)
-        else:
+        elif direction == "d":
             for i in range(3):
                 state = self.rotate(state)
             flag, state, score = self.swipe(state)
@@ -80,8 +82,9 @@ class game():
         # check if game over
         if not flag:
             return -1, state, score
-
-        self.place_random_element(state)
+        
+        if place_element:
+            self.place_random_element(state)
         return None, state, score 
 
     def place_random_element(self, state):
@@ -107,8 +110,8 @@ class game():
 
         for move in moves:
             temp_state = copy.deepcopy(state)
-            flag, _, __ = self.move(temp_state, move) 
-            if flag != -1:
+            t_flag, _, __ = self.move(temp_state, move) 
+            if t_flag != -1:
                 possible_moves.append(move)
         
         return possible_moves
