@@ -12,7 +12,7 @@ def draw_game(screen, grid, myfont):
     for i in range(constants.GRID_ORDER):
         for j in range(constants.GRID_ORDER):
             n = grid[i][j]
-
+              
             # padding everything
             rect_x = j * constants.WIDTH // constants.GRID_ORDER + constants.SPACING
             rect_y = i * constants.HEIGHT // constants.GRID_ORDER + constants.SPACING
@@ -25,6 +25,8 @@ def draw_game(screen, grid, myfont):
                 pygame.Rect(rect_x, rect_y, rect_w, rect_h), 
                 border_radius=8)
 
+            if n == 0:
+                n = ""
             text_surface = myfont.render(f"{n}", True, (0, 0, 0))
             text_rect = text_surface.get_rect(center=(rect_x + rect_w/2, rect_y + rect_h/2))
 

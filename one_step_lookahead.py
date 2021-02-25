@@ -8,15 +8,8 @@ obj = game()
 state = obj.get_initial_state()
 score = 0
 
-while True:
-    print("CURRENT SCORE:", score, "\n")
-    for i in state:
-        for j in i:
-            temp = str(j)
-            for l in range(5 - len(temp)):
-                temp = " " + temp             
-            print(temp, end=" ")
-        print() 
+while True:    
+    obj.display(state, score)
 
     possible_moves = obj.get_possible_moves(state)
     if possible_moves == []:
@@ -37,11 +30,22 @@ while True:
         if j == best_score:
             best_moves.append(i)
 
-    best_move = random.choices(best_moves)[0]
+    
+    if "w" in best_moves:
+        best_move = "w"
+    elif "a" in best_moves:
+        best_move = "a"
+    else:
+        best_move = random.choices(best_moves)[0]
+
 
     _, state, temp_score = obj.move(state, best_move) 
     score += temp_score 
 
-    _ = os.system('cls')
+    # _ = os.system('cls')
 
-print("GAME OVER!!!")
+max_ = 0 
+for row in state:
+    if max_ < max(row):
+        max_ = max(row)
+print("GAME OVER!!!", score, max_)

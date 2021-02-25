@@ -63,17 +63,32 @@ while True:
         if j == best_score:
             best_moves.append(i)
 
+
     best_move = random.choices(best_moves)[0]
+
     _, state, temp_score = obj.move(state, best_move) 
     score += temp_score 
+    
+    # count = 0
+    # for row in state:
+    #     count += row.count(0)
 
-    if score > 2000:
-        N = 3
-    elif score > 7000:
-        N = 4
+    # if count >= 8 or score < 3000:
+    #     N = 2
+    # elif count >= 4:
+    #     N = 3 
+    # elif count >=2:
+    #     N = 4
+    # else:
+    #     N = 5
+
+    # if score > 3000:
+    #     N = 3
+    # elif score > 10000:
+    #     N = 4
 
     _ = os.system('cls')
 
 obj.display(state, str(score) + " || GAME OVER!!!")
-time.sleep(10)
-# print("GAME OVER!!!")
+# time.sleep(10)
+print("GAME OVER!!!", score)
