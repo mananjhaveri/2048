@@ -3,6 +3,7 @@ import os
 import time 
 import random 
 import copy 
+import csv
 
 obj = game() 
 state = obj.get_initial_state()
@@ -49,3 +50,9 @@ for row in state:
     if max_ < max(row):
         max_ = max(row)
 print("GAME OVER!!!", score, max_)
+
+# append data in csv file
+fields = [score, max_]
+with open("data/one_step_lookahead.csv", 'a', newline='') as f:
+    writer = csv.writer(f)
+    writer.writerow(fields)
