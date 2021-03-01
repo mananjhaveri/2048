@@ -37,7 +37,7 @@ def display(state, score):
     current_state = np.array(state)
     
     pygame.init()
-    pygame.display.set_caption(f"2048: Defeating Argha Das, CURRENT SCORE: {score}")
+    pygame.display.set_caption(f"2048 | CURRENT SCORE: {score}")
 
     pygame.font.init()
     myfont = pygame.font.SysFont('Comic Sans MS', 42)

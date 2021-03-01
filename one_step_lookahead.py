@@ -11,7 +11,7 @@ score = 0
 
 while True:    
     obj.display(state, score)
-
+    time.sleep(0.5)
     possible_moves = obj.get_possible_moves(state)
     if possible_moves == []:
         break
@@ -51,8 +51,8 @@ for row in state:
         max_ = max(row)
 print("GAME OVER!!!", score, max_)
 
-# append data in csv file
-fields = [score, max_]
-with open("data/one_step_lookahead.csv", 'a', newline='') as f:
-    writer = csv.writer(f)
-    writer.writerow(fields)
+# # append data in csv file
+# fields = [score, max_]
+# with open("data/one_step_lookahead.csv", 'a', newline='') as f:
+#     writer = csv.writer(f)
+#     writer.writerow(fields)

@@ -43,8 +43,6 @@ class game():
                             flag = True
                         state[i][j], state[i+1][j] = state[i+1][j], 0
                         
-
-        
         for i in range(3):
             for j in range(4):  
                 if state[i][j] == state[i+1][j] and state[i+1][j] != 0:
@@ -123,29 +121,13 @@ class game():
 
 
 
-# obj = game()
-# state = obj.get_initial_state()
-# score = 0
-# while True:
-#     print("CURRENT SCORE:", score, "\n")
-#     for i in state:
-#         for j in i:
-#             temp = str(j)
-#             for l in range(5 - len(temp)):
-#                 temp = " " + temp 
-            
-#             print(temp, end=" ")
-#         print()
-        
+obj = game()
+state = obj.get_initial_state()
+total_score = 0
 
-#     direction = input().lower() 
-#     if direction in obj.get_possible_moves(state):
-#         _, state, temp_score = obj.move(state, direction)
-#         score += temp_score
+while True:
+    obj.display(state, total_score)
 
-#     _ = os.system('cls')
-
-
-# print("GAME OVER")
-
-
+    move = input()
+    _, state, score = obj.move(state, move)
+    total_score += score 
